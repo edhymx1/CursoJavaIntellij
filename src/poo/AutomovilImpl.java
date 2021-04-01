@@ -1,40 +1,35 @@
 package poo;
 
+import poo.automovil.Automovil;
+import poo.automovil.Color;
+import poo.automovil.Motor;
+import poo.automovil.Tanque;
+import poo.automovil.TipoMotor;
+
 public class AutomovilImpl {
     public static void main(String[] args) {
         Automovil.setCapacidadTanqueEstatico(45);
         Automovil subaru = new Automovil("Subaru", "Impreza");
-        subaru.setCilindrada(2.0);
+        subaru.setMotor(new Motor(2.0, TipoMotor.BENCINA));
+        subaru.setTanque(new Tanque());
         subaru.setColor(Color.BLANCO);
-        subaru.setTipo(TipoAutomovil.HATCHBACK);
 
-        Automovil mazda = new Automovil("Mazda", "BT-50", Color.ROJO, 3.0);
-        mazda.setTipo(TipoAutomovil.PICKUP);
+        Automovil mazda = new Automovil("Mazda", "BT-50", Color.ROJO, new Motor(3.0,TipoMotor.DIESEL));
+        mazda.setTanque(new Tanque(45));
         System.out.println("mazda.fabricante = " + mazda.getFabricante());
 
+        Automovil nissan = new Automovil("Nissan", "Navara", Color.GRIS);
+        nissan.setMotor(new Motor(4.0, TipoMotor.DIESEL));
+        nissan.setTanque(new Tanque(50));
 
-        Automovil nissan = new Automovil("Nissan", "Navara", Color.GRIS, 3.5, 50);
-        nissan.setTipo(TipoAutomovil.PICKUP);
+        Automovil nissan2 = new Automovil("Nissan", "Navara", Color.GRIS);
+        nissan2.setMotor(new Motor(3.5, TipoMotor.BENCINA));
+        nissan2.setTanque(new Tanque(50));
 
-        Automovil nissan2 = new Automovil("Nissan", "Navara", Color.GRIS, 3.5, 50);
-        nissan.setColor(Color.AMARILLO);
-        nissan2.setTipo(TipoAutomovil.PICKUP);
-        Automovil.setColorPatente(Color.AZUL);
+        Automovil auto = new Automovil();
 
-        Automovil autor = new Automovil();
-
-        System.out.println(subaru.toString());
-        System.out.println(mazda.toString());
-        System.out.println(nissan.toString());
-
-        System.out.println(nissan2.toString());
-        System.out.println("Automovil.getColorPatente() = " + Automovil.getColorPatente().getColor());
-        System.out.println("Velocidad máxima carretera: " + Automovil.VELOCIDAD_MAXIMA_CARRETERA);
-        System.out.println("Velocidad máxima ciudad: " + Automovil.VELOCIDAD_MAXIMA_CIUDAD);
-
-        TipoAutomovil tipoSubaru = subaru.getTipo();
-        System.out.println("tipo subaru: " + tipoSubaru.getNombre());
-        System.out.println("tipo desc. subaru: " + tipoSubaru.getDescripcion());
-        System.out.println("tipo numeroPuertas subaru: " + tipoSubaru.getNumeroPuerta());
+        System.out.println(subaru.verDetalle());
+        System.out.println(mazda.verDetalle());
+        System.out.println(nissan.verDetalle());
     }
 }

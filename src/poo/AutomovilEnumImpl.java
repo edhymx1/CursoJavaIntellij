@@ -1,14 +1,24 @@
 package poo;
 
+import poo.automovil.Automovil;
+import poo.automovil.Color;
+import poo.automovil.Motor;
+import poo.automovil.Tanque;
+import poo.automovil.TipoMotor;
+import poo.automovil.TipoAutomovil;
+
+
 public class AutomovilEnumImpl {
     public static void main(String[] args) {
         Automovil.setCapacidadTanqueEstatico(45);
         Automovil subaru = new Automovil("Subaru", "Impreza");
-        subaru.setCilindrada(2.0);
+        subaru.setMotor(new Motor(2.0, TipoMotor.BENCINA));
+        subaru.setTanque(new Tanque());
         subaru.setColor(Color.BLANCO);
         subaru.setTipo(TipoAutomovil.HATCHBACK);
 
-        Automovil mazda = new Automovil("Mazda", "BT-50", Color.ROJO, 3.0);
+        Automovil mazda = new Automovil("Mazda", "BT-50", Color.ROJO);
+        mazda.setTanque(new Tanque(45));
         mazda.setTipo(TipoAutomovil.PICKUP);
         System.out.println("mazda.fabricante = " + mazda.getFabricante());
 

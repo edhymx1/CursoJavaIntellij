@@ -1,13 +1,17 @@
-package poo;
+package poo.automovil;
+
+import poo.automovil.Color;
+import poo.automovil.TipoAutomovil;
 
 public class Automovil {
-
     private int id;
     private String fabricante;
     private String modelo;
     private Color color = Color.GRIS;
-    private double cilindrada;
-    private int capacidadTanque = 40;
+    private Motor motor;
+    private Tanque tanque;
+    private Persona conductor;
+    private Rueda[] ruedas;
 
     private TipoAutomovil tipo;
 
@@ -33,14 +37,20 @@ public class Automovil {
         this.color = color;
     }
 
-    public Automovil(String fabricante, String modelo, Color color, double cilindrada) {
+    public Automovil(String fabricante, String modelo, Color color, Motor motor) {
         this(fabricante, modelo, color);
-        this.cilindrada = cilindrada;
+        this.motor = motor;
     }
 
-    public Automovil(String fabricante, String modelo, Color color, double cilindrada, int capacidadTanque) {
-        this(fabricante, modelo, color, cilindrada);
-        this.capacidadTanque = capacidadTanque;
+    public Automovil(String fabricante, String modelo, Color color, Motor motor, Tanque tanque) {
+        this(fabricante, modelo, color, motor);
+        this.tanque = tanque;
+    }
+
+    public Automovil(String fabricante, String modelo, Color color, Motor motor, Tanque tanque, Persona conductor, Rueda[] ruedas) {
+        this(fabricante, modelo, color, motor, tanque);
+        this.conductor = conductor;
+        this.ruedas = ruedas;
     }
 
     public String getFabricante() {
@@ -67,22 +77,6 @@ public class Automovil {
         this.color = color;
     }
 
-    public double getCilindrada() {
-        return cilindrada;
-    }
-
-    public void setCilindrada(double cilindrada) {
-        this.cilindrada = cilindrada;
-    }
-
-    public int getCapacidadTanque() {
-        return capacidadTanque;
-    }
-
-    public void setCapacidadTanque(int capacidadTanque) {
-        this.capacidadTanque = capacidadTanque;
-    }
-
     public static int getCapacidadTanqueEstatico() {
         return capacidadTanqueEstatico;
     }
@@ -107,6 +101,42 @@ public class Automovil {
         this.tipo = tipo;
     }
 
+    public Motor getMotor() {
+        return motor;
+    }
+
+    public void setMotor(Motor motor) {
+        this.motor = motor;
+    }
+
+    public Tanque getTanque() {
+        if(tanque == null) {
+            this.tanque = new Tanque();
+        }
+        return tanque;
+    }
+
+    public void setTanque(Tanque tanque) {
+        this.tanque = tanque;
+    }
+
+    public Persona getConductor() {
+        return conductor;
+    }
+
+    public void setConductor(Persona conductor) {
+        this.conductor = conductor;
+    }
+
+    public Rueda[] getRuedas() {
+        return ruedas;
+    }
+
+    public void setRuedas(Rueda[] ruedas) {
+        this.ruedas = ruedas;
+    }
+
+
     public String acelerar(int rpm) {
         return "el auto " + this.fabricante + " acelerando a " + rpm + " rpm";
     }
@@ -115,16 +145,22 @@ public class Automovil {
         return this.fabricante + " " + this.modelo + "frenando!";
     }
 
-    @Override
-    public String toString() {
-        return "Automovil{" +
-                "id=" + id +
-                ", fabricante='" + fabricante + '\'' +
-                ", modelo='" + modelo + '\'' +
-                ", color=" + color +
-                ", cilindrada=" + cilindrada +
-                ", capacidadTanque=" + capacidadTanque +
-                ", tipo=" + tipo.getDescripcion() +
-                '}';
+    public String verDetalle() {
+        String detalle =  "auto.id = " + this.id +
+            "\nauto.fabricante = " + this.getFabricante() +
+            "\nauto.modelo = " +    this.getModelo();
+
+        if(this.getTipo() != null) {
+            detalle += "\nauto.tipo = " + this.getTipo().getDescripcion();
+        }
+
+        detalle += "\nauto.color = " + this.color +
+            "\nauto.patenteColor = " + this.colorPatente;
+
+        if(this.motor != null) {
+            detalle += "\ncilindrada = " + this.motor.getCilindrada();
+        }
+
+        return detalle;
     }
 }

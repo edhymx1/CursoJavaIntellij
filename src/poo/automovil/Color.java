@@ -1,4 +1,4 @@
-package poo;
+package poo.automovil;
 
 public enum Color {
     ROJO("Rojo"),
